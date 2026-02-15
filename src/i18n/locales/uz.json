@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "recipes": "Retseptlar",
+    "pantry": "Oshxona",
+    "shopping": "Xarid ro'yxati",
+    "favorites": "Sevimlilar"
+  },
+  "home": {
+    "hero_title": "Raqamli",
+    "hero_subtitle": "Oshxonangizni an'anaviy o'zbek dasturxoni kabi boshqaring - ko'p mehmonlarni kutib olish yoki tez taom tayyorlash uchun.",
+    "explore_recipes": "Retseptlarni Ko'rish",
+    "sync_to_phone": "Telefonla Sinxronlash",
+    "everything_you_need": "Oshxonangiz Uchun Barcha Kerakli Narsalar",
+    "everything_subtitle": "Retseptlarni topishdan xarid ro'yxatigacha, o'zbek oshxonangizni oson boshqaring",
+    "authentic_recipes": "Asl Retseptlar",
+    "authentic_recipes_desc": "Toshkentdan Samarqandgacha an'anaviy o'zbek taomlari",
+    "smart_pantry": "Aqlli Oshxona",
+    "smart_pantry_desc": "Mahsulotlarni vizual holat ko'rsatkichlari bilan kuzatib boring",
+    "shopping_lists": "Xarid Ro'yxatlari",
+    "shopping_lists_desc": "Sevimli retseptlaringizdan avtomatik yaratilgan ro'yxatlar",
+    "recipes_stat": "Asl Retseptlar",
+    "cooks_stat": "Faol Oshpazlar",
+    "companion_stat": "Oshxona Hamrohi",
+    "ready_to_transform": "Oshxonangizni O'zgartirishga Tayyormisiz?",
+    "ready_subtitle": "Oshxonalarini aqlli tarzda boshqarayotgan yuzlab uy oshpazlariga qo'shiling",
+    "get_started": "Hozir Boshlang",
+    "total_calories_today": "Bugungi Umumiy Kaloriya"
+  },
+  "recipes": {
+    "title": "Retseptlar To'plami",
+    "subtitle": "Asl o'zbek taomlarini kashf eting va ingredientlarni xarid ro'yxatingizga qo'shing",
+    "search_placeholder": "Retseptlar, ingredientlar yoki kategoriyalarni qidirish...",
+    "filters": "Filtrlar",
+    "showing": "Ko'rsatilmoqda",
+    "recipe": "retsept",
+    "recipes": "retsept",
+    "no_recipes": "Retseptlar topilmadi",
+    "adjust_search": "Qidiruvingizni yoki filtrlaringizni sozlang",
+    "key_ingredients": "Asosiy ingredientlar:",
+    "add_ingredients": "Ingredientlar Qo'shish",
+    "all": "hammasi",
+    "servings": "porsiya",
+    "servings_label": "Porsiyalar",
+    "calories": "kaloriya",
+    "approximate": "Taxminiy",
+    "view_recipe": "Retseptni Ko'rish",
+    "add_to_shopping": "Xarid Ro'yxatiga Qo'shish",
+    "instructions": "Ko'rsatmalar"
+  },
+  "pantry": {
+    "title": "Oshxona Inventari",
+    "subtitle": "Ingredientlaringiz va zaxiralaringizni boshqaring",
+    "add_item": "Element Qo'shish",
+    "in_stock": "Mavjud",
+    "low": "Kam",
+    "out": "Tugagan"
+  },
+  "shopping": {
+    "title": "Xarid Ro'yxati",
+    "items_to_buy": "xarid qilish kerak",
+    "item_to_buy": "xarid qilish kerak",
+    "add_item": "Element Qo'shish",
+    "add_new_item": "Yangi Element Qo'shish",
+    "item_name": "Element nomi",
+    "quantity": "Miqdor (masalan, 2 kg)",
+    "add": "Qo'shish",
+    "cancel": "Bekor qilish",
+    "order_from_korzinka": "Korzinkadan Buyurtma",
+    "sync_to_mobile": "Mobil Bilan Sinxronlash",
+    "copy_list": "Ro'yxatni Nusxalash",
+    "to_buy": "Xarid Qilish Kerak",
+    "completed": "Bajarildi",
+    "empty_title": "Xarid ro'yxatingiz bo'sh",
+    "empty_subtitle": "Qo'lda qo'shing yoki retseptlarni ko'rib chiqing",
+    "add_first_item": "Birinchi Elementni Qo'shing",
+    "for": "Uchun:",
+    "item_added": "Element xarid ro'yxatiga qo'shildi",
+    "copied_success": "Xarid ro'yxati klipbordga nusxalandi!",
+    "copied_korzinka": "Xarid ro'yxati nusxalandi!",
+    "opening_korzinka": "Korzinka.uz ochilmoqda...",
+    "copy_failed": "Ro'yxatni nusxalash amalga oshmadi"
+  },
+  "sync": {
+    "title": "Mobil Bilan Sinxronlash",
+    "subtitle": "Oshxona va xarid ro'yxatingizga yo'lda kirish uchun ushbu QR kodni telefoningiz bilan skanerlang",
+    "close": "Yopish"
+  },
+  "common": {
+    "sync": "Sinxronlash",
+    "close": "Yopish"
+  }
+}

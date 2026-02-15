@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Home",
+    "recipes": "Recipes",
+    "pantry": "Pantry",
+    "shopping": "Shopping List",
+    "favorites": "Favorites"
+  },
+  "home": {
+    "hero_title": "Your Digital",
+    "hero_subtitle": "Manage your kitchen like a traditional Uzbek feast—expanding to welcome many guests or folding neatly for a quick meal.",
+    "explore_recipes": "Explore Recipes",
+    "sync_to_phone": "Sync to Phone",
+    "everything_you_need": "Everything You Need in Your Kitchen",
+    "everything_subtitle": "From recipe discovery to shopping lists, manage your Uzbek kitchen with ease",
+    "authentic_recipes": "Authentic Recipes",
+    "authentic_recipes_desc": "Traditional Uzbek dishes from Tashkent to Samarkand",
+    "smart_pantry": "Smart Pantry",
+    "smart_pantry_desc": "Track ingredients with visual status indicators",
+    "shopping_lists": "Shopping Lists",
+    "shopping_lists_desc": "Auto-generated lists from your favorite recipes",
+    "recipes_stat": "Authentic Recipes",
+    "cooks_stat": "Active Cooks",
+    "companion_stat": "Kitchen Companion",
+    "ready_to_transform": "Ready to Transform Your Kitchen?",
+    "ready_subtitle": "Join hundreds of home cooks managing their kitchens the smart way",
+    "get_started": "Get Started Now",
+    "total_calories_today": "Total Calories Today"
+  },
+  "recipes": {
+    "title": "Recipe Collection",
+    "subtitle": "Discover authentic Uzbek dishes and add ingredients to your shopping list",
+    "search_placeholder": "Search recipes, ingredients, or categories...",
+    "filters": "Filters",
+    "showing": "Showing",
+    "recipe": "recipe",
+    "recipes": "recipes",
+    "no_recipes": "No recipes found",
+    "adjust_search": "Try adjusting your search or filters",
+    "key_ingredients": "Key ingredients:",
+    "add_ingredients": "Add Ingredients",
+    "all": "all",
+    "servings": "servings",
+    "servings_label": "Servings",
+    "calories": "calories",
+    "approximate": "Approximate",
+    "view_recipe": "View Recipe",
+    "add_to_shopping": "Add to Shopping List",
+    "instructions": "Instructions"
+  },
+  "pantry": {
+    "title": "Pantry Inventory",
+    "subtitle": "Manage your ingredients and stock levels",
+    "add_item": "Add Item",
+    "in_stock": "In Stock",
+    "low": "Low Stock",
+    "out": "Out of Stock"
+  },
+  "shopping": {
+    "title": "Shopping List",
+    "items_to_buy": "items to buy",
+    "item_to_buy": "item to buy",
+    "add_item": "Add Item",
+    "add_new_item": "Add New Item",
+    "item_name": "Item name",
+    "quantity": "Quantity (e.g., 2 kg)",
+    "add": "Add",
+    "cancel": "Cancel",
+    "order_from_korzinka": "Order from Korzinka",
+    "sync_to_mobile": "Sync to Mobile",
+    "copy_list": "Copy List",
+    "to_buy": "To Buy",
+    "completed": "Completed",
+    "empty_title": "Your shopping list is empty",
+    "empty_subtitle": "Add items manually or browse recipes to get started",
+    "add_first_item": "Add Your First Item",
+    "for": "For:",
+    "item_added": "Item added to shopping list",
+    "copied_success": "Shopping list copied to clipboard!",
+    "copied_korzinka": "Shopping list copied!",
+    "opening_korzinka": "Opening Korzinka.uz...",
+    "copy_failed": "Failed to copy list"
+  },
+  "sync": {
+    "title": "Sync to Mobile",
+    "subtitle": "Scan this QR code with your phone to access your pantry and shopping list on the go",
+    "close": "Close"
+  },
+  "common": {
+    "sync": "Sync",
+    "close": "Close"
+  }
+}

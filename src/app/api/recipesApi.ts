@@ -31,10 +31,10 @@ export async function updateRecipe(id: string, recipe: Partial<Recipe>): Promise
     return res.json();
 }
 
-export async function updateRecipeStatus(id: string, status: 'approved' | 'rejected'): Promise<Recipe> {
+export async function updateRecipeStatus(id: string, status: 'approved' | 'rejected', isPro?: boolean): Promise<Recipe> {
     const res = await authFetch(`/api/recipes/${id}/status`, {
         method: 'PUT',
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status, isPro }),
     });
     if (!res.ok) throw new Error('Failed to update recipe status');
     return res.json();

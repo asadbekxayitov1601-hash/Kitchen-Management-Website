@@ -7,7 +7,9 @@ interface User {
   email: string;
   name?: string;
   isAdmin?: boolean;
+  isPro?: boolean;
   photoURL?: string;
+  cardLast4?: string;
 }
 
 interface AuthContextValue {

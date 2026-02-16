@@ -79,5 +79,15 @@
     "copied_korzinka": "Список покупок скопирован!",
     "opening_korzinka": "Открытие Korzinka.uz...",
     "copy_failed": "Не удалось скопировать список"
+  },
+  "footer": {
+    "subscribe_title": "Подпишитесь на нашу рассылку",
+    "subscribe_desc": "Получайте последние рецепты и обновления на вашу почту.",
+    "email_placeholder": "Введите ваш email",
+    "subscribe_btn": "Подписаться",
+    "subscribing": "Подписка...",
+    "subscribed_success": "Спасибо за подписку!",
+    "already_subscribed": "Вы уже подписаны.",
+    "subscribe_error": "Не удалось подписаться. Попробуйте еще раз."
   }
 }

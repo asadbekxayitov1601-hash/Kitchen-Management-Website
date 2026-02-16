@@ -20,6 +20,8 @@ export interface Recipe {
   youtubeUrl?: string;
   status?: 'pending' | 'approved' | 'rejected';
   userId?: number;
+  isPro?: boolean;
+  user?: { name?: string | null; email?: string };
   createdAt?: string;
 }
 

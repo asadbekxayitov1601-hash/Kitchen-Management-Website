@@ -135,40 +135,18 @@ export function RecipesPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {recentRecipes.map((recipe, idx) => (
                     <motion.div
+                      key={`recent-${recipe.id}`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.1 }}
-                      key={`recent-${recipe.id}`}
-                      className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 cursor-pointer"
-                      onClick={() => handleViewRecipe(recipe)}
                     >
-                      <div className="aspect-[4/3] overflow-hidden">
-                        <img
-                          src={recipe.image}
-                          alt={recipe.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        {recipe.category && (
-                          <div className="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-medium uppercase tracking-wider text-gray-600">
-                            {recipe.category}
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4">
-                        <h3 className="font-semibold text-gray-900 mb-1 line-clamp-1">{recipe.title}</h3>
-                        <div className="flex items-center gap-4 text-xs text-gray-500">
-                          {recipe.cookTime && (
-                            <span className="flex items-center gap-1">
-                              <Clock className="w-3 h-3" /> {recipe.cookTime}
-                            </span>
-                          )}
-                          {recipe.servings && (
-                            <span className="flex items-center gap-1">
-                              <ChefHat className="w-3 h-3" /> {recipe.servings} pp
-                            </span>
-                          )}
-                        </div>
-                      </div>
+                      <RecipeCard
+                        recipe={recipe}
+                        isFavorite={favorites.has(recipe.id)}
+                        onAddToShoppingList={handleAddToShoppingList}
+                        onViewRecipe={handleViewRecipe}
+                        onToggleFavorite={handleToggleFavorite}
+                      />
                     </motion.div>
                   ))}
                 </div>

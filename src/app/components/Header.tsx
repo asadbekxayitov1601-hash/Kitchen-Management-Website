@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown, User, LogOut } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, User, LogOut, Crown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../auth/AuthProvider';
 import { useTranslation } from 'react-i18next';
@@ -145,11 +145,16 @@ export function Header() {
                 ) : auth.user ? (
                   <div className="flex items-center gap-3">
                     <Link to="/profile" className="hidden sm:flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary relative">
                         {auth.user.photoURL ? (
                           <img src={auth.user.photoURL} alt={auth.user.name} className="w-full h-full rounded-full object-cover" />
                         ) : (
                           <User className="w-4 h-4" />
+                        )}
+                        {auth.user.isPro && (
+                          <div className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full p-0.5 border-2 border-white shadow-sm">
+                            <Crown className="w-2 h-2 text-white fill-current" />
+                          </div>
                         )}
                       </div>
                       <span>{auth.user.name?.split(' ')[0] || 'User'}</span>
@@ -294,8 +299,13 @@ export function Header() {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="flex items-center gap-3 px-4 py-3 rounded-2xl text-gray-700 hover:bg-gray-50"
                       >
-                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary relative">
                           <User className="w-4 h-4" />
+                          {auth.user.isPro && (
+                            <div className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full p-0.5 border-2 border-white shadow-sm">
+                              <Crown className="w-2 h-2 text-white fill-current" />
+                            </div>
+                          )}
                         </div>
                         <span className="font-medium">Profile ({auth.user.name})</span>
                       </Link>

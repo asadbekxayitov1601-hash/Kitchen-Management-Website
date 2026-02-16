@@ -86,6 +86,16 @@
     "subtitle": "Scan this QR code with your phone to access your pantry and shopping list on the go",
     "close": "Close"
   },
+  "footer": {
+    "subscribe_title": "Subscribe to our newsletter",
+    "subscribe_desc": "Get the latest recipes and updates delivered to your inbox.",
+    "email_placeholder": "Enter your email",
+    "subscribe_btn": "Subscribe",
+    "subscribing": "Subscribing...",
+    "subscribed_success": "Thank you for subscribing!",
+    "already_subscribed": "You are already subscribed.",
+    "subscribe_error": "Failed to subscribe. Please try again."
+  },
   "common": {
     "sync": "Sync",
     "close": "Close"

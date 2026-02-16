@@ -86,6 +86,16 @@
     "subtitle": "Oshxona va xarid ro'yxatingizga yo'lda kirish uchun ushbu QR kodni telefoningiz bilan skanerlang",
     "close": "Yopish"
   },
+  "footer": {
+    "subscribe_title": "Bizning xabarnomamizga obuna bo'ling",
+    "subscribe_desc": "Eng so'nggi retseptlar va yangiliklarni pochta orqali oling.",
+    "email_placeholder": "Emailingizni kiriting",
+    "subscribe_btn": "Obuna bo'lish",
+    "subscribing": "Obuna bo'linmoqda...",
+    "subscribed_success": "Obuna bo'lganingiz uchun rahmat!",
+    "already_subscribed": "Siz allaqachon obuna bo'lgansiz.",
+    "subscribe_error": "Obuna bo'lib bo'lmadi. Iltimos, qayta urinib ko'ring."
+  },
   "common": {
     "sync": "Sinxronlash",
     "close": "Yopish"

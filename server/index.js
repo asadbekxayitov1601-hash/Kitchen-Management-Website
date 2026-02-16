@@ -10,7 +10,8 @@ const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // auth middleware
 function requireAuth(req, res, next) {
@@ -52,8 +53,8 @@ app.post('/api/signup', async (req, res) => {
         isAdmin: !!isAdmin
       }
     });
-    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: '7d' });
-    res.json({ token, user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin } });
+    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro }, JWT_SECRET, { expiresIn: '7d' });
+    res.json({ token, user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro } });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: 'Server error' });
@@ -68,8 +69,8 @@ app.post('/api/login', async (req, res) => {
     if (!user) return res.status(401).json({ message: 'Invalid credentials' });
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) return res.status(401).json({ message: 'Invalid credentials' });
-    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: '7d' });
-    res.json({ token, user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin } });
+    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro }, JWT_SECRET, { expiresIn: '7d' });
+    res.json({ token, user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro } });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: 'Server error' });
@@ -87,7 +88,7 @@ app.get('/api/me', (req, res) => {
     // Fetch latest user data from DB to ensure isAdmin is up to date
     prisma.user.findUnique({ where: { id: payload.id } }).then(user => {
       if (!user) return res.status(401).json({ message: 'User not found' });
-      res.json({ user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin } });
+      res.json({ user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro } });
     }).catch(e => res.status(500).json({ message: 'Server error' }));
   } catch (e) {
     res.status(401).json({ message: 'Invalid token' });
@@ -280,11 +281,14 @@ app.post('/api/recipes', requireAuth, async (req, res) => {
 app.put('/api/recipes/:id/status', requireAuth, requireAdmin, async (req, res) => {
   try {
     const id = Number(req.params.id);
-    const { status } = req.body; // 'approved' or 'rejected'
+    const { status, isPro } = req.body; // 'approved' or 'rejected'
+
+    const data = { status };
+    if (typeof isPro === 'boolean') data.isPro = isPro;
 
     const updated = await prisma.recipe.update({
       where: { id },
-      data: { status }
+      data
     });
 
     res.json(updated);
@@ -424,6 +428,99 @@ app.delete('/api/favorites/:recipeId', requireAuth, async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+// Pro Subscription
+app.post('/api/subscribe/pro', requireAuth, async (req, res) => {
+  try {
+    const { plan, cardToken } = req.body; // 'weekly', 'monthly', 'yearly'
+
+    // If cardToken is provided, save it (simplified logic)
+    if (cardToken) {
+      await prisma.user.update({
+        where: { id: req.user.id },
+        data: { cardToken }
+      });
+    }
+
+    // In a real app, charge the card here using the token!
+
+    let endDate = new Date();
+    if (plan === 'weekly') endDate.setDate(endDate.getDate() + 7);
+    else if (plan === 'yearly') endDate.setFullYear(endDate.getFullYear() + 1);
+    else endDate.setMonth(endDate.getMonth() + 1); // Monthly default
+
+    const user = await prisma.user.update({
+      where: { id: req.user.id },
+      data: {
+        isPro: true,
+        subType: plan,
+        subEndDate: endDate
+      }
+    });
+
+    res.json({ ok: true, user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro, cardLast4: user.cardLast4 } });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
+
+app.post('/api/payment/verify-card', requireAuth, async (req, res) => {
+  try {
+    const { cardNumber, expiry } = req.body;
+    // Mock gateway call
+    // Return transaction ID for OTP step
+    res.json({ transactionId: 'txn_' + Date.now(), message: 'SMS sent to linked phone number' });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Gateway error' });
+  }
+});
+
+app.post('/api/payment/confirm-otp', requireAuth, async (req, res) => {
+  try {
+    const { transactionId, otp, cardNumber } = req.body;
+
+    if (otp !== '1111') { // Mock OTP
+      return res.status(400).json({ message: 'Invalid SMS code' });
+    }
+
+    // Mock token generation
+    const cardToken = 'tok_' + Math.random().toString(36).substr(2, 9);
+    const cardLast4 = cardNumber.slice(-4);
+
+    await prisma.user.update({
+      where: { id: req.user.id },
+      data: { cardToken, cardLast4 }
+    });
+
+    res.json({ ok: true, cardToken, cardLast4 });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Verification failed' });
+  }
+});
+
+app.post('/api/subscribe/cancel', requireAuth, async (req, res) => {
+  try {
+    const user = await prisma.user.update({
+      where: { id: req.user.id },
+      data: {
+        isPro: false, // Immediately cancel for now
+        subType: null,
+        subEndDate: null
+      }
+    });
+    res.json({ ok: true, user: { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin, isPro: user.isPro, cardLast4: user.cardLast4 } });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

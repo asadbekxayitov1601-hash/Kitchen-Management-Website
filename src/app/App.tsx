@@ -17,7 +17,11 @@ import { AdminPage } from './pages/AdminPage';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import '../i18n/config';
 
+import { useAuth } from './auth/AuthProvider';
+import { PanLoader } from './components/PanLoader';
+
 function App() {
+  const { loading } = useAuth();
   const [dailyCalories, setDailyCalories] = useState<number>(() => {
     const saved = localStorage.getItem('dasturxon-daily-calories');
     const savedDate = localStorage.getItem('dasturxon-calories-date');
@@ -38,6 +42,17 @@ function App() {
   const addCalories = (calories: number) => {
     setDailyCalories(prev => prev + calories);
   };
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#FFFDF5]">
+        <div className="flex flex-col items-center gap-6">
+          <PanLoader />
+          <p className="text-gray-500 font-medium animate-pulse">Loading Dasturkhon...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>

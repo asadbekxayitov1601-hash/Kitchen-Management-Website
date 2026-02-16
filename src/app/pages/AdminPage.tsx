@@ -24,7 +24,8 @@ export function AdminPage() {
         category: 'main',
         youtubeUrl: '',
         ingredientsStr: '',
-        instructionsStr: ''
+        instructionsStr: '',
+        isPro: false
     });
 
     useEffect(() => {
@@ -61,7 +62,8 @@ export function AdminPage() {
             await createRecipe({
                 ...formData,
                 ingredients,
-                instructions
+                instructions,
+                isPro: formData.isPro
             });
 
             toast.success('Recipe created!');
@@ -73,7 +75,8 @@ export function AdminPage() {
                 category: 'main',
                 youtubeUrl: '',
                 ingredientsStr: '',
-                instructionsStr: ''
+                instructionsStr: '',
+                isPro: false
             });
             loadData();
         } catch (e: any) {
@@ -92,10 +95,10 @@ export function AdminPage() {
         }
     };
 
-    const handleApprove = async (id: string) => {
+    const handleApprove = async (id: string, isPro: boolean) => {
         try {
-            await updateRecipeStatus(id, 'approved');
-            toast.success('Recipe approved');
+            await updateRecipeStatus(id, 'approved', isPro);
+            toast.success(`Recipe approved as ${isPro ? 'Pro' : 'Free'}`);
             loadData();
         } catch (e: any) {
             toast.error('Failed to approve recipe');
@@ -173,13 +176,21 @@ export function AdminPage() {
                                                 </div>
                                             )}
 
-                                            <div className="mt-auto flex gap-2">
-                                                <button
-                                                    onClick={() => handleApprove(recipe.id)}
-                                                    className="flex-1 flex items-center justify-center gap-2 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors font-medium"
-                                                >
-                                                    <Check className="w-4 h-4" /> Approve
-                                                </button>
+                                            <div className="mt-auto flex flex-col gap-2">
+                                                <div className="flex gap-2">
+                                                    <button
+                                                        onClick={() => handleApprove(recipe.id, false)}
+                                                        className="flex-1 py-1.5 bg-green-50 text-green-700 rounded hover:bg-green-100 text-xs font-medium border border-green-200"
+                                                    >
+                                                        Free
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleApprove(recipe.id, true)}
+                                                        className="flex-1 py-1.5 bg-purple-50 text-purple-700 rounded hover:bg-purple-100 text-xs font-medium border border-purple-200"
+                                                    >
+                                                        Pro
+                                                    </button>
+                                                </div>
                                                 <button
                                                     onClick={() => handleReject(recipe.id)}
                                                     className="flex-1 flex items-center justify-center gap-2 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors font-medium"
@@ -272,6 +283,16 @@ export function AdminPage() {
                                         onChange={e => setFormData({ ...formData, youtubeUrl: e.target.value })}
                                         className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
                                     />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        id="isPro"
+                                        checked={formData.isPro}
+                                        onChange={e => setFormData({ ...formData, isPro: e.target.checked })}
+                                        className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                                    />
+                                    <label htmlFor="isPro" className="text-sm font-medium text-gray-700">Pro Recipe</label>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Ingredients (one per line)</label>
